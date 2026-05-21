@@ -58,7 +58,7 @@ pipeline {
                 echo 'Deploying app...'
                 sh 'docker stop my-app || true'
                 sh 'docker rm my-app || true'
-                sh "docker run -d -p 3000:3000 --name my-app ${DOCKER_IMAGE}:latest"
+                sh "docker run -d -p 3021:3000 --name my-app ${DOCKER_IMAGE}:latest"
             }
         }
 
