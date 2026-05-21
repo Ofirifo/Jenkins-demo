@@ -5,6 +5,10 @@ pipeline {
         DOCKER_IMAGE = 'your-dockerhub-username/my-app'
     }
 
+    tools {
+	nodejs 'NodeJS'
+    }
+
     stages {
 
         stage('Checkout') {
