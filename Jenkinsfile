@@ -3,14 +3,21 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'ofirifo/my-app'
+	APP_PORT = '3021'
+        STAGING_PORT = '3022'
     }
 
     tools {
         nodejs 'NodeJS'
     }
 
-    stages {
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '5'))
+        timeout(time: 10, unit: 'MINUTES')
+        disableConcurrentBuilds()
+    }
 
+    stages {
         stage('Checkout') {
             steps {
                 echo 'Pulling code from GitHub...'
@@ -66,7 +73,7 @@ pipeline {
 
     post {
         success {
-            echo 'Pipeline succeeded! App is live on port 3000.'
+            echo 'Pipeline succeeded! App is live on port 3021.'
         }
         failure {
             echo 'Pipeline failed! Check the Console Output for details.'
